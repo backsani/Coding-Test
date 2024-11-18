@@ -7,9 +7,8 @@ int solution(vector<int> arr, int idx) {
     int answer = -1;
     
     for(int i{}; i < arr.size(); i++){
-        if(idx <= i){
-            if(arr[i] == 1)
-                return i;
+        if(idx <= i && arr[i] == 1){
+            return i;
         }
     }
     
