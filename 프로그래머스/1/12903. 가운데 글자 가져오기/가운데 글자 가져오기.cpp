@@ -4,23 +4,5 @@
 using namespace std;
 
 string solution(string s) {
-    string answer = "";
-    bool even = s.size() % 2 == 0;
-    int len = even ? s.size() / 2 : s.size() / 2 + 1;
-    int i = 0;
-    
-    for(char c : s)
-    {
-        ++i;
-        if(i == len)
-        {
-            answer += c;
-            if(even)
-            {
-                len++;
-                even = !even;
-            }
-        }
-    }
-    return answer;
+    return s.size() & 1 ? s.substr(s.size()/2, 1) : s.substr(s.size()/2 - 1, 2);
 }
