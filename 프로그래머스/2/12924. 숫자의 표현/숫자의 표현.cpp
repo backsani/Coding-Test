@@ -1,38 +1,21 @@
-#include <string>
-#include <vector>
-#include <algorithm>
-
+#include<iostream>
+#include<cmath>
 using namespace std;
-
-int solution(int n) {
-    int answer = 0;
-    int i = 0;
-    int temp = 0;
-    
-    vector<int> v;
-    
-    while(true)
+int solution(int testCase)
+{
+    int answer=0;
+  int to=ceil((-1+sqrt(1+8*testCase))/2);
+    for(int i=1;i<=to;i++)
+  {
+    if(i%2==1&&testCase%i==0)
     {
-        if(temp > n)
-        {
-            temp -= v.front();
-            
-            v.erase(v.begin());
-            continue;
-        }
-        else if(temp == n)
-        {
-            answer++;
-            
-        }
-        i++;
-        
-        temp += i;
-        v.push_back(i);
-        
-        if(i > n)
-            break;
+      answer++; 
     }
-    
+    else if(i%2==0&&(testCase%i)==(i/2))
+    {
+      answer++;
+    }
+  }
+
     return answer;
 }
