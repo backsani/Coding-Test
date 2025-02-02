@@ -24,14 +24,10 @@ int solution(string skill, vector<string> skill_trees) {
                     can = false;
                     break;
                 }
-                    
             }
         }
-        
         if(can)
             answer++;
     }
-    
-    
     return answer;
 }
