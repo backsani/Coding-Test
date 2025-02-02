@@ -10,14 +10,11 @@ vector<int> solution(vector<int> numbers) {
     
     for(int i = numbers.size() - 1; i >= 0; i--)
     {
-        if(!s.empty() && numbers[i] >= s.top())
-        {
+        while (!s.empty() && s.top() <= numbers[i]) {
             s.pop();
-            i++;
-            continue;
         }
         
-        if(!s.empty() && numbers[i] < s.top())
+        if(!s.empty())
         {
             answer[i] = s.top();
         }
