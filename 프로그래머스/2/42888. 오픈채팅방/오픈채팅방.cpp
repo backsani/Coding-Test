@@ -36,12 +36,16 @@ vector<string> solution(vector<string> record) {
         }
     }
     
+    //저장된 순서를 한개씩 가져온다.
     for(pair<string, string> p : v)
     {
+        //state가 Enter면
         if(p.first == "Enter")
         {
+            //현재 유저의 최종 이름을 가져와 문자열을 만든다.
             answer.push_back(m[p.second] + "님이 들어왔습니다.");
         }
+        //state가 Leave면
         else if(p.first == "Leave")
         {
             answer.push_back(m[p.second] + "님이 나갔습니다.");
