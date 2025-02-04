@@ -21,17 +21,8 @@ string solution(vector<int> numbers) {
         answer += str;
     }
     
-    int zeroCount = 0;
-    for(int i = 0; i < answer.length(); i++)
-    {
-        if(answer[i] == '0')
-            zeroCount++;
-        else
-            break;
-    }
     
-    answer.substr(zeroCount, answer.length() - zeroCount);
-    if(zeroCount == answer.length())
+    if(answer == string(answer.length(), '0'))
         return "0";
     
     return answer;
