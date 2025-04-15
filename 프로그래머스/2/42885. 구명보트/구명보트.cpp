@@ -1,36 +1,23 @@
-#include <string>
 #include <vector>
 #include <algorithm>
 
-using namespace std;
 
-int solution(vector<int> people, int limit) {
-    int answer = 0;
+int solution(std::vector<int> people, int limit) 
+{
+    std::sort(people.begin(), people.end());
     
-    sort(people.begin(), people.end());
+    int left = 0; 
+    int right = people.size() - 1;
+    int boats = 0; 
     
-    int frontP = 0;
-    int backP = people.size() - 1;
-    
-    while(frontP <= backP)
-    {
-        if(frontP == backP)
-        {
-            answer++;
-            backP--;
+    while (left <= right) {
+        
+        if (people[left] + people[right] <= limit) {
+            left++; 
         }
-        else if(people[frontP] + people[backP] <= limit)
-        {
-            answer++;
-            frontP++;
-            backP--;
-        }
-        else if(people[frontP] + people[backP] > limit)
-        {
-            answer++;
-            backP--;
-        }
+        right--; 
+        boats++; 
     }
     
-    return answer;
+    return boats;
 }
