@@ -10,7 +10,7 @@ int solution(vector<string> babbling) {
 
     for (string str : babbling)
     {
-        string prev = "";     // 바로 이전에 제거한 단어
+        string prev = "";
         bool isSpeak = true;
 
         while (isSpeak)
@@ -20,7 +20,7 @@ int solution(vector<string> babbling) {
             for (int i = 0; i < babb.size(); i++)
             {
                 size_t index = str.find(babb[i]);
-                if (index == 0 && babb[i] != prev)
+                if (index == 0)
                 {
                     str.erase(0, babb[i].size());
                     prev = babb[i];
