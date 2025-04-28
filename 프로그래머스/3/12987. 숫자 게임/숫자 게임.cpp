@@ -21,11 +21,7 @@ int solution(vector<int> A, vector<int> B) {
             backPoint--;
             count++;
         }
-        else if(B[i] > A[frontPoint])
-        {
-            frontPoint++;
-            count++;
-        }
+
         else
             frontPoint++;
     }
