@@ -5,8 +5,6 @@
 
 using namespace std;
 
-#include <set>  // 중복 제거를 위한 헤더 추가
-
 int dfs(string numbers, string number, vector<bool>& v, set<int>& used)
 {
     int count = 0;
