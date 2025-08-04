@@ -14,30 +14,20 @@ vector<int> solution(vector<vector<int>> score) {
         int sum = v[0] + v[1];
         scoreCount[sum]++;
         
-        if(scoreCount[sum] <= 1)
-            scoreSum.push_back(sum);
+        scoreSum.push_back(sum);
     }
     
-    vector<int> ranks(201, 0);
     
     for(int i : scoreSum)
     {
         int rank = 1;
         
-        for(int j : scoreSum)
+        for(int j = i + 1; j <= 200; j++)
         {
-            if(i < j)
-            {
-                rank += scoreCount[j];
-            }
+            rank += scoreCount[j];
         }
         
-        ranks[i] = rank;
-    }
-    
-    for(vector<int> v : score)
-    {
-        answer.push_back(ranks[v[0] + v[1]]);
+        answer.push_back(rank);
     }
     
     return answer;
