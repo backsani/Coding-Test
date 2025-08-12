@@ -1,17 +1,35 @@
 #include <string>
 #include <vector>
 #include <queue>
-#include <map>
+#include <unordered_map>
 #include <sstream>
 
 using namespace std;
 
+void cleanMax(priority_queue<int>& queue, unordered_map<int, int>& m)
+{
+    while(!queue.empty() && m[queue.top()] == 0)
+    {
+        queue.pop();
+    }
+    return;
+}
+
+void cleanMin(priority_queue<int, vector<int>, greater<int>>& queue, unordered_map<int, int>& m)
+{
+    while(!queue.empty() && m[queue.top()] == 0)
+    {
+        queue.pop();
+    }
+    return;
+}
+
 vector<int> solution(vector<string> operations) {
-    map<int, int> m;
+    unordered_map<int, int> m;
     priority_queue<int> maxQ;
     priority_queue<int, vector<int>, greater<int>> minQ;
     
-    for(string str : operations)
+    for(const string& str : operations)
     {
         stringstream ss(str);
         
@@ -29,79 +47,40 @@ vector<int> solution(vector<string> operations) {
         else
         {            
             int temp;
-            bool end = false;
             
             if(maxQ.empty() || minQ.empty())
                 continue;
             
             if(num == 1)
             {
+                cleanMax(maxQ, m);
+                if(maxQ.empty())
+                    continue;
+                
                 temp = maxQ.top();
                 
-                while(m[temp] == 0)
-                {
-                    maxQ.pop();
-
-                    if(maxQ.size() == 0)
-                    {
-                        end = true;
-                        break;
-                    }
-
-                    temp = maxQ.top();
-                }
-                
-                if(!end)
-                {
-                    maxQ.pop();
-                    m[temp]--;
-                }
+                maxQ.pop();
+                m[temp]--;
             }
             else
             {
+                cleanMin(minQ, m);
                 temp = minQ.top();
+                if(minQ.empty())
+                    continue;
                 
-                while(m[temp] == 0)
-                {
-                    minQ.pop();
-
-                    if(maxQ.size() == 0)
-                    {
-                        end = true;
-                        break;
-                    }
-
-                    temp = minQ.top();
-                }
-                
-                if(!end)
-                {
-                    minQ.pop();
-                    m[temp]--;
-                }
+                minQ.pop();
+                m[temp]--;
             }
         }
         
-        while(m[maxQ.top()] == 0 && !maxQ.empty())
-        {
-            maxQ.pop();
-        }
-        
-        while(m[minQ.top()] == 0 && !minQ.empty())
-        {
-            minQ.pop();
-        }
-        
-        if(maxQ.size() == 0 || minQ.size() == 0)
-        {
-            maxQ = priority_queue<int>();
-            minQ = priority_queue<int, vector<int>, greater<int>>();
-        }
     }
+    
+    cleanMax(maxQ, m);
+    cleanMin(minQ, m);
     
     if(maxQ.size() == 0 || minQ.size() == 0)
         return {0,0};
-    
     
     return {maxQ.top(), minQ.top()};
 }
