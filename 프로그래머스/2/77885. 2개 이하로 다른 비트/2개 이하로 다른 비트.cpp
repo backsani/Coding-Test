@@ -3,19 +3,14 @@
 #include <bitset>
 
 using namespace std;
-
-long long compareBit(long long x)
-{
-    return x + 1 + ((x ^ (x + 1)) >> 2);
-}
+typedef long long ll;
 
 vector<long long> solution(vector<long long> numbers) {
     vector<long long> answer;
-    
-    for(long long l : numbers)
-    {
-        answer.push_back(compareBit(l));
+    for(ll& n : numbers) {
+        ll idx = (~n & -~n);
+        ll ans = n + idx - (idx >> 1);
+        answer.push_back(ans);
     }
-    
     return answer;
 }
