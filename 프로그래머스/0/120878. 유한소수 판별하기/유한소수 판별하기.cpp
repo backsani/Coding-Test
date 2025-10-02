@@ -29,8 +29,5 @@ int solution(int a, int b)
         break;
     }
     
-    if(b == 1)
-        return 1;
-    
-    return 2;
+    return b == 1 ? 1 : 2;
 }
