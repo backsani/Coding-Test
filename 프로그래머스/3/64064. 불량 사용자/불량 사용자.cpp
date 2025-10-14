@@ -81,5 +81,4 @@ int solution(vector<string> user_id, vector<string> banned_id) {
     }
     
     return bfs(v);
-    //return v[1][0];
 }
