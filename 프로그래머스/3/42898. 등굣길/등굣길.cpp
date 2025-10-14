@@ -3,8 +3,6 @@
 
 using namespace std;
 
-
-
 int solution(int m, int n, vector<vector<int>> puddles) {
     vector<vector<int>> map(n, vector<int>(m, 0));
     map[0][0] = 1;
