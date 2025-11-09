@@ -28,7 +28,6 @@ string minuteToTime(int time)
 
 string solution(int n, int t, int m, vector<string> timetable) {
     int currentTime = 540; // 9시부터 운행 시작
-    vector<int> minuteTable;
     priority_queue<int, vector<int>, greater<int>> pq;
     
     for(string str : timetable)
