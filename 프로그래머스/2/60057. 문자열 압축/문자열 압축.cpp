@@ -34,7 +34,7 @@ int splitStr(int length, string str)
 int solution(string s) {
     int answer = s.size();
     
-    for(int i = 1; i < s.size(); i++)
+    for(int i = 1; i <= s.size() / 2; i++)
     {
         int result = splitStr(i, s);
         answer = result < answer ? result : answer;
