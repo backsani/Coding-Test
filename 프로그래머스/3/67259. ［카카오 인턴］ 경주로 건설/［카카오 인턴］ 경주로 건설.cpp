@@ -2,6 +2,7 @@
 #include <vector>
 #include <queue>
 #include <algorithm>
+#include <climits>
 
 using namespace std;
 
@@ -18,7 +19,7 @@ struct Node {
 
 int solution(vector<vector<int>> board) {
     int n = board.size();
-    int INF = 1e9;
+    int INF = INT_MAX;
     int dx[4] = {1, -1, 0, 0};
     int dy[4] = {0, 0, 1, -1};
 
