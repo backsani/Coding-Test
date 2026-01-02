@@ -44,5 +44,5 @@ int solution(int n, int w, int num) {
         answer++;
     }
     
-    return answer;
+    return -1;
 }
