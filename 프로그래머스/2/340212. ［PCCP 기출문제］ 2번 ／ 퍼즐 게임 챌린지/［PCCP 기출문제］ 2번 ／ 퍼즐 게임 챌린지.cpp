@@ -12,7 +12,7 @@ int solution(vector<int> diffs, vector<int> times, long long limit) {
     int minLevel = 0;
     int maxLevel = level;
     
-    while(minLevel != maxLevel)
+    while(1)
     {
         long long currentTime = 0;
         int prevTime = 0;
