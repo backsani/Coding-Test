@@ -52,7 +52,8 @@ long long solution(int n, vector<int> works) {
 
     // 최종 피로도 계산
     long long answer = 0;
-    for (auto &p : work) {
+    for (auto &p : work) 
+    {
         answer += 1LL * p.first * p.first * p.second;
     }
     return answer;
