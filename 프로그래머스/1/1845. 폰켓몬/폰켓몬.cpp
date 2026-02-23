@@ -1,11 +1,27 @@
 #include <vector>
 #include <algorithm>
+
 using namespace std;
 
 int solution(vector<int> nums)
 {
-    int numsSize = nums.size() / 2;
+    int answer = 0;
+    
+    int num = nums.size() / 2;
+    
     sort(nums.begin(), nums.end());
-    nums.erase(unique(nums.begin(), nums.end()), nums.end());
-    return nums.size() > numsSize ? numsSize : nums.size();
+    
+    int prev = 0;
+    for(int poketmon : nums)
+    {
+        if(prev != poketmon)
+        {
+            answer++;
+            prev = poketmon;
+            if(--num <= 0)
+                break;
+        }
+    }
+    
+    return answer;
 }
