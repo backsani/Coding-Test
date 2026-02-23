@@ -5,7 +5,7 @@
 using namespace std;
 
 string solution(vector<string> participant, vector<string> completion) {
-   int a;
+    string answer = "";
     
     sort(participant.begin(), participant.end());
     sort(completion.begin(), completion.end());
@@ -16,5 +16,5 @@ string solution(vector<string> participant, vector<string> completion) {
             return participant[i];
     }
     
-    return participant.back();
+    return participant[participant.size() - 1];
 }
