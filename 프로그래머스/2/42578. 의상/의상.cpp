@@ -1,26 +1,27 @@
 #include <string>
 #include <vector>
-#include <unordered_map>
+#include <map>
+#include <set>
 
 using namespace std;
 
 int solution(vector<vector<string>> clothes) {
-    int answer = 0;
+    int answer = 1;
     
-    unordered_map<string, vector<string>> m;
+    map<string, vector<string>> m;
+    set<string> s;
     
-    for(vector<string> v : clothes)
+    for(const vector<string> clothe : clothes)
     {
-        m[v[1]].push_back(v[0]);
+        m[clothe[1]].push_back(clothe[0]);
+        s.insert(clothe[1]);
     }
     
-    int temp = 1;
-    for(pair<string, vector<string>> p : m)
+    for(string str : s)
     {
-        
-        temp *= p.second.size() + 1;
-        
+        int num = m[str].size();
+        answer *= num + 1;
     }
     
-    return temp - 1;
+    return answer - 1;
 }
