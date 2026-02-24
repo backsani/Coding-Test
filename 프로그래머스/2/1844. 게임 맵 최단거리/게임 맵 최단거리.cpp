@@ -1,44 +1,49 @@
 #include <vector>
 #include <queue>
+#include <set>
 
 using namespace std;
 
-int solution(vector<vector<int> > maps)
+int bfs(vector<vector<int>>& maps)
 {
-    int answer = 0;
-    queue<pair<pair<int, int>, int>> q;
-    vector<vector<bool>> visited(maps.size(), vector<bool>(maps[0].size(), false));
-    visited[0][0] = true;
+    vector<pair<int, int>> direction = {{0,1}, {0,-1}, {1,0}, {-1,0}};
     
-    vector<pair<int, int>> direction = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-
-    q.push(make_pair(make_pair(0,0), 1));
+    pair<int, int> currentPos = {0,0};
+    vector<vector<bool>> visited(maps.size(), vector<bool>(maps[0].size(), false));
+    
+    queue<pair<pair<int,int>, int>> q;
+    
+    q.push({currentPos, 1});
+    visited[0][0] = true;
     
     while(!q.empty())
     {
-        pair<pair<int, int>, int> currentPos = q.front();
+        pair<pair<int, int>, int> currentNode = q.front();
         q.pop();
         
-        int x = currentPos.first.first;
-        int y = currentPos.first.second;
+        pair<int, int> pos = currentNode.first;
+        int step = currentNode.second;
         
-        int steps = currentPos.second;
-        
-        if(x == maps[0].size() - 1 && y == maps.size() - 1)
-            return steps;
-        
-        for(pair<int, int> p : direction)
+        for(size_t i = 0; i < direction.size(); i++)
         {
-            int nextX = x + p.first;
-            int nextY = y + p.second;
+            int ny = direction[i].first + pos.first;
+            int nx = direction[i].second + pos.second;
             
-            if(nextX >= 0 && nextX < maps[0].size() && nextY >= 0 && nextY < maps.size() && visited[nextY][nextX] != true && maps[nextY][nextX] != 0)
-            {
-                visited[nextY][nextX] = true;
-                q.push(make_pair(make_pair(nextX, nextY), steps + 1));
-            }
+            if(ny >= maps.size() || ny < 0 || nx >= maps[0].size() || nx < 0 || maps[ny][nx] == 0 || visited[ny][nx] == true)
+                continue;
+            
+            if(ny == maps.size() - 1 && nx == maps[0].size() -1)
+                return step + 1;
+            
+            q.push({{ny, nx}, step + 1});
+            visited[ny][nx] = true;
         }
     }
     
     return -1;
+}
+
+int solution(vector<vector<int> > maps)
+{
+    return bfs(maps);;
 }
