@@ -8,49 +8,38 @@ using namespace std;
 vector<int> solution(vector<string> genres, vector<int> plays) {
     vector<int> answer;
     map<string, int> m;
-    
-    int index = 1;
-    
-    for(int i = 0; i < genres.size(); i++)
-    {
-        if(m[genres[i]] == 0)
-        {
-            m[genres[i]] = index;
-            index++;
-        }
-    }
-    
-    vector<pair<int, vector<int>>> group(index, {0, {}});
-    vector<int> sum(index, 0);
+    // index, plays
+    map<string, vector<pair<int, int>>> genreM;
     
     for(int i = 0; i < genres.size(); i++)
     {
-        int temp = m[genres[i]];
-        group[temp].second.push_back(i);
-        group[temp].first += plays[i];
+        m[genres[i]] += plays[i];
+        genreM[genres[i]].push_back({i, plays[i]});
     }
     
-    sort(group.begin(), group.end(), [](auto& a, auto& b){
-        return a.first > b.first;
-    });
+    vector<pair<string, int>> v(m.begin(), m.end());
     
-    for(auto& [i, v] : group)
+    sort(v.begin(), v.end(), [](const pair<string, int>& a, const pair<string, int>& b){
+             return a.second > b.second;
+         });
+    
+    for(pair<string, int> p : v)
     {
-        if(v.empty())
-            continue;
+        vector<pair<int, int>> genre = genreM[p.first];
         
-        sort(v.begin(), v.end(), [plays](int a, int b){
-            if(plays[a] != plays[b])
-                return plays[a] > plays[b];
-            else
-                return a < b;
+        if(genre.size() == 1)
+        {
+            answer.push_back(genre[0].first);
+            continue;
+        }
+        
+        sort(genre.begin(), genre.end(), [](const pair<int, int>& a, const pair<int, int>& b){
+            return a.second > b.second;
         });
         
-        answer.push_back(v[0]);
-        if(v.size() >= 2)
-            answer.push_back(v[1]);
+        answer.push_back(genre[0].first);
+        answer.push_back(genre[1].first);
     }
     
-    //return {group[0].first};
     return answer;
 }
