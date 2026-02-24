@@ -1,37 +1,37 @@
 #include <string>
 #include <vector>
+#include <map>
 #include <queue>
 #include <set>
-#include <algorithm>
-#include <map>
 
 using namespace std;
 
-int bfs(vector<vector<int>>& v)
+int bfs(map<int, queue<int>>& m)
 {
     queue<pair<int, int>> q;
     set<int> visited;
-    int step = 0;
-    int index = 0;
     
     q.push({1, 0});
     visited.insert(1);
     map<int, int> count;
-    
+        
     while(!q.empty())
     {
         pair<int, int> current = q.front();
         q.pop();
         
-        for(int i : v[current.first])
+        while(!m[current.first].empty())
         {
             int size = visited.size();
-            visited.insert(i);
             
-            if(size == visited.size())
+            int next = m[current.first].front();
+            m[current.first].pop();
+            
+            visited.insert(next);
+            if(visited.size() == size)
                 continue;
             
-            q.push({i, current.second + 1});
+            q.push({next, current.second + 1});
             count[current.second + 1]++;
         }
     }
@@ -40,12 +40,13 @@ int bfs(vector<vector<int>>& v)
 }
 
 int solution(int n, vector<vector<int>> edge) {
-    vector<vector<int>> v(n + 1, vector<int>());
-    for(vector<int> temp : edge)
-    {
-        v[temp[0]].push_back(temp[1]);
-        v[temp[1]].push_back(temp[0]);
-    }
+    map<int, queue<int>> m;
     
-    return bfs(v);
+    for(vector<int> v : edge)
+    {
+        m[v[0]].push(v[1]);
+        m[v[1]].push(v[0]);
+    }
+
+    return bfs(m);;
 }
