@@ -6,13 +6,14 @@ using namespace std;
 
 bool solution(vector<string> phone_book) {
     bool answer = true;
-    
     sort(phone_book.begin(), phone_book.end());
     
-    for(int i = 0; i < phone_book.size() - 1; i++)
+    string prev = phone_book[0];
+    for(int i = 1; i < phone_book.size(); i++)
     {
-        if(phone_book[i + 1].find(phone_book[i]) == 0)
+        if(phone_book[i].substr(0, prev.size()) == prev)
             return false;
+        prev = phone_book[i];
     }
     
     return answer;
