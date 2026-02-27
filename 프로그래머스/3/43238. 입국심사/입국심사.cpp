@@ -13,6 +13,7 @@ long long solution(int n, vector<int> times) {
     long long minT = 1;
     answer = maxT;
     
+    
     while(minT <= maxT)
     {
         long long midT = (maxT + minT) / 2;
