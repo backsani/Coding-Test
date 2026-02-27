@@ -29,5 +29,6 @@ vector<int> solution(string s) {
         answer[1] += zeroCount;
     }
     
+    
     return answer;
 }
